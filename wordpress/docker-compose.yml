@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  wordpress:
+    image: wordpress:5.2.2
+    container_name: wordpress_container
+    ports:
+        - "8080:80"
+    depends_on:
+      - mariadb
+    volumes:
+      - ./wordpress-data:/var/www/html
+    restart: always
+    env_file: .env
+  mariadb:
+    image: mariadb:10.4.7
+    container_name: mariadb_container
+    volumes:
+      - mariadb_db_data:/var/lib/mysql
+    #  - "./db-data:/var/lib/mysql"
+    restart: always
+    env_file: .env
+
+volumes:
+    mariadb_db_data:
