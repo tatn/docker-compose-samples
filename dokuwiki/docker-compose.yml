@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  dokuwiki:
+    image: dokuwiki
+    container_name: dokuwiki_container
+    build: ./
+    ports:
+        - "8080:80"
+    volumes:
+      - ./dokuwiki-data:/var/www/html
+      - ./000-default.conf:/etc/apache2/sites-available/000-default.conf
+    restart: always
