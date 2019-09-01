@@ -1,0 +1,31 @@
+version: '3'
+services:
+  grav:
+    image: grav
+    container_name: grav_container
+    build:
+      context: .
+      args:
+        ADMIN_USER: admin
+        ADMIN_PASSWORD: Password1234567890
+        ADMIN_EMAIL: admin@example.com
+        ADMIN_PERMISSIONS: b
+        ADMIN_FULLNAME: "Admin Name"
+        ADMIN_TITLE: Administrator
+    tty: true
+    volumes:
+     - ./grav-data:/var/www/grav
+    # - grav_volume:/var/www/grav/
+    ports:
+     - "8080:80"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "3"
+    networks:
+      - default
+    restart: always
+#volumes:
+#  grav_volume:
+#    external: false
